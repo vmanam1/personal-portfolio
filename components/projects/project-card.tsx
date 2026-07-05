@@ -9,7 +9,7 @@ export function ProjectCard({ project }: { project: ProjectFrontmatter }) {
     <article className="group relative flex min-h-[22rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-[border-color,transform] hover:border-accent/50 motion-safe:hover:-translate-y-0.5 sm:p-8">
       <div className="mb-8 grid aspect-[16/8] place-items-center rounded-[var(--radius-md)] border border-border bg-surface-subtle p-6">
         <span className="font-mono text-xs tracking-[0.16em] text-muted-foreground uppercase">
-          Case study
+          Project
         </span>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -28,7 +28,7 @@ export function ProjectCard({ project }: { project: ProjectFrontmatter }) {
       </h2>
       <p className="mt-3 leading-7 text-muted-foreground">{project.summary}</p>
       <div className="mt-auto flex items-center gap-2 pt-8 text-sm font-medium text-accent">
-        View case study
+        View project
         <ArrowUpRight
           className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
           aria-hidden

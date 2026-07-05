@@ -56,9 +56,7 @@ test("all rendered internal links resolve successfully", async ({
   }
 });
 
-test("project MDX renders the complete case-study structure", async ({
-  page,
-}) => {
+test("project MDX renders the complete project structure", async ({ page }) => {
   await page.goto("/projects/pdf-rag-pipeline");
 
   const sections = [

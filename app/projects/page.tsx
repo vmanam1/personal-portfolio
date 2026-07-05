@@ -18,7 +18,7 @@ export default async function ProjectsPage() {
       <PageHeader
         eyebrow="Projects"
         title="Systems, pipelines, and products."
-        description="Selected engineering work presented as evolving case studies. Missing details are marked clearly rather than inferred."
+        description="Selected personal and academic engineering projects. Missing details are marked clearly rather than inferred."
       />
       <div className="wide-container section-space grid gap-6 md:grid-cols-2">
         {projects.map((project) => (

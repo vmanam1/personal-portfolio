@@ -2,7 +2,11 @@ import { describe, expect, it } from "vitest";
 
 import { getAllEducation } from "@/lib/content/education";
 import { getAllExperiences } from "@/lib/content/experience";
-import { getAllProjects, getProjectBySlug } from "@/lib/content/projects";
+import {
+  getAllProjects,
+  getFeaturedProjects,
+  getProjectBySlug,
+} from "@/lib/content/projects";
 import { getSkillGroups } from "@/lib/content/skills";
 
 describe("portfolio content", () => {
@@ -20,9 +24,14 @@ describe("portfolio content", () => {
 
   it("compiles all project MDX and resolves a project by slug", async () => {
     const projects = await getAllProjects();
+    const featuredProjects = await getFeaturedProjects();
     const project = await getProjectBySlug("pdf-rag-pipeline");
 
     expect(projects).toHaveLength(4);
+    expect(featuredProjects.map((item) => item.slug)).toEqual([
+      "pdf-rag-pipeline",
+      "nyc-data-analytics-pipeline",
+    ]);
     expect(project?.title).toBe("PDF RAG Pipeline");
   });
 });

@@ -1,56 +1,105 @@
 ---
 title: PDF RAG Pipeline
 slug: pdf-rag-pipeline
-summary: A project case study for a PDF retrieval-augmented generation pipeline. Technical details are being prepared.
-status: Case study in progress
-publishedAt: 2026-07
+summary: A multimodal retrieval-augmented generation pipeline for exploring ArXiv research papers through natural-language questions and optional image queries.
+status: Complete
+publishedAt: 2026-06
 updatedAt: 2026-07
-featured: true
+featuredOrder: 1
 draft: false
 tags:
   - AI/ML
-  - Data
-technologies: []
+  - Information Retrieval
+  - Web
+technologies:
+  - Python
+  - Django
+  - CLIP
+  - PyTorch
+  - FAISS
+  - Groq
+  - Docker
+  - RocksDB
 repositoryUrl: https://github.com/vmanam1/pdf-rag-pipeline
 demoUrl: null
 ---
 
 ## Overview
 
-TODO: Add the approved project overview and intended users.
+This project is a retrieval-augmented generation system for exploring academic papers through natural-language questions. It turns paper abstracts, sections, and figures into a shared 512-dimensional vector representation, retrieves relevant source material with FAISS, and sends that context to a Groq-hosted language model through a Django web application.
+
+The prepared corpus contains 30 papers and 287 indexed paper sections. Retrieval remains available without a language-model API key through a deterministic local fallback that returns the most relevant source context.
 
 ## Problem
 
-TODO: Describe the specific problem this pipeline addresses and the constraints that shaped it.
+Academic papers combine long-form text, structured sections, and figures. The project needed one retrieval workflow that could accept text or image input, locate the most relevant paper sections, preserve the link between vectors and their original sources, and continue producing useful results when an external generation service was unavailable.
 
 ## Solution
 
-TODO: Explain the implemented retrieval and generation workflow without adding unsupported claims.
+The pipeline separates offline indexing from online retrieval and generation. During indexing, paper text and figures are embedded into 512-dimensional vectors, stored in a FAISS index, and mapped back to paper IDs, section names, and source text. During a query, the Django application embeds the input, retrieves the five nearest sections by L2 distance, assembles a context-enriched prompt, and requests an answer from Groq.
+
+If Groq is not configured or temporarily unavailable, the application returns the highest-ranked retrieved context instead of failing the request.
 
 ## Architecture
 
-TODO: Add the verified system components, data flow, and an architecture diagram.
+1. Prepared paper JSON provides metadata, abstracts, sections, and figures.
+2. The vectorization workflow embeds text and images into a shared 512-dimensional space.
+3. FAISS stores the vectors in an exact `IndexFlatL2` index.
+4. A vector map connects each search result to its paper and source section.
+5. The Django interface accepts a question or optional image upload.
+6. The query embedding retrieves the five nearest indexed sections.
+7. Retrieved text is sent to Groq as grounded context, with a local retrieval fallback when generation is unavailable.
 
 ## Features
 
-TODO: Document the implemented user-facing and system capabilities.
+- Text and image retrieval over paper abstracts, sections, and figures
+- Exact nearest-neighbor vector search with FAISS
+- Source mapping from vectors back to papers and section text
+- Context-aware answer generation through the Groq chat-completions API
+- Django browser interface and JSON endpoints
+- Automatic FAISS index reconstruction when the binary index is unavailable
+- Docker packaging and a Render service blueprint
+- Separate RocksDB-compatible metadata experiments using `rocksdict`
 
 ## Tech Stack
 
-TODO: Confirm and list the technologies used in the repository.
+- **Application:** Django, HTML, JavaScript, Gunicorn
+- **Language and ML:** Python, CLIP, Transformers, PyTorch
+- **Retrieval:** FAISS exact L2 vector search
+- **Generation:** Groq API
+- **Metadata prototype:** RocksDB-compatible storage through `rocksdict`
+- **Packaging:** Docker
+- **Deployment configuration:** Render blueprint
 
 ## Implementation
 
-TODO: Describe the important implementation decisions and supporting code paths.
+The project supports two embedding modes. Its default lightweight mode creates deterministic 512-dimensional hash vectors without downloading a model, which keeps low-resource deployment and validation workflows usable. An optional CLIP mode loads `openai/clip-vit-base-patch32` through Transformers for semantic text and image embeddings.
+
+The checked-in vector mapping allows the Django retrieval path to reconstruct the FAISS binary index when needed. Query vectors and corpus vectors must use the same embedding strategy; mixing the lightweight and CLIP spaces would make similarity scores invalid.
+
+The web application exposes endpoints for creating text or image embeddings, retrieving similar content, generating an answer from a query and its context, and accepting image uploads.
 
 ## Challenges
 
-TODO: Document real engineering challenges and how they were handled.
+- CLIP provides meaningful multimodal embeddings but requires substantially more memory and downloads model weights on first use.
+- Exact L2 search is simple and appropriate for the prepared corpus, but it is not intended for vector collections at million-scale.
+- Generated answers depend on an external API, so retrieval needed a deterministic fallback path.
+- Generated indexes and uploaded files use local container storage rather than durable object storage.
+- RocksDB-compatible storage remains a separate prototype and is not part of the Django request path.
 
 ## Lessons Learned
 
-TODO: Add lessons supported by the development process.
+- Corpus and query vectors must use the same embedding space for similarity results to remain meaningful.
+- Keeping retrieval useful without an LLM key makes the system easier to validate and more resilient to external-service failures.
+- Separating vectorization, indexing, retrieval, generation, and web delivery keeps the pipeline easier to test and evolve.
+- Exact search is a practical choice for a small prepared corpus, while larger collections would require a different indexing strategy and evaluation plan.
 
 ## Future Improvements
 
-TODO: Add planned improvements after the current implementation has been reviewed.
+- Extract text, tables, and figures directly from uploaded PDFs
+- Add overlapping chunks and source-page citations
+- Move artifacts to object storage and a managed vector database
+- Add reranking and retrieval-quality evaluation datasets
+- Stream generated responses in the browser
+- Introduce background indexing jobs and corpus versioning
+- Add rate limiting, upload validation, structured logging, and broader automated tests before handling untrusted public traffic

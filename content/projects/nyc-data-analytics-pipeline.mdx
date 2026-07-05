@@ -1,56 +1,103 @@
 ---
-title: NYC Data Analytics Pipeline
+title: NYC Taxi Graph Analytics Pipeline
 slug: nyc-data-analytics-pipeline
-summary: A project case study for an NYC data analytics pipeline. Technical details are being prepared.
-status: Case study in progress
+summary: A graph-based streaming analytics system that models NYC Yellow Taxi trips in Neo4j, runs PageRank and breadth-first search, and extends batch ingestion through Kafka and Kubernetes.
+status: Complete
 publishedAt: 2026-07
 updatedAt: 2026-07
-featured: true
+featuredOrder: 2
 draft: false
 tags:
-  - Data
-  - Analytics
-technologies: []
+  - Data Engineering
+  - Graph Analytics
+  - Distributed Systems
+technologies:
+  - Python
+  - Apache Kafka
+  - Neo4j
+  - Docker
+  - Kubernetes
+  - Pytest
+  - Ruff
 repositoryUrl: https://github.com/vmanam1/nyc-taxi-graph-analytics-pipeline
 demoUrl: null
 ---
 
 ## Overview
 
-TODO: Add the approved project overview, dataset scope, and intended audience.
+This project is a graph-based streaming analytics system built from NYC Yellow Taxi trip data. It models taxi zones and trips in Neo4j, ranks influential zones with PageRank, finds routes with breadth-first search, and extends batch ingestion into a Kafka pipeline deployed on Kubernetes.
+
+The repository is a cleaned, tested, and documented portfolio edition of a graduate project for CSE 511: Data Processing at Scale at Arizona State University.
 
 ## Problem
 
-TODO: Describe the specific analytics problem and processing constraints.
+NYC taxi trips naturally describe movement between geographic zones. The project needed to transform parquet trip records into a graph that could support influence ranking and route traversal, then extend that batch workflow into a reproducible streaming architecture.
+
+The implementation also needed to remain practical on local development infrastructure rather than assuming a production-scale managed cluster.
 
 ## Solution
 
-TODO: Explain the verified pipeline stages and analytical workflow.
+The first phase downloads and filters March 2022 Yellow Taxi data, creates `Location` nodes and directed `TRIP` relationships in Neo4j, and exposes PageRank and breadth-first search through a Python analytics interface. Batched Cypher writes avoid issuing one database operation per trip.
+
+The second phase publishes trip events through Kafka and uses the Neo4j Kafka connector as a sink. Docker supports the local graph environment, while Kubernetes manifests reproduce the Kafka, ZooKeeper, connector, and Neo4j stack on Minikube.
 
 ## Architecture
 
-TODO: Add the system components, data movement, storage, and architecture diagram.
+1. The NYC Taxi & Limousine Commission parquet dataset provides Yellow Taxi trip records.
+2. A Python producer transforms and filters records in batches.
+3. Kafka receives trip events for the streaming phase.
+4. The Neo4j Kafka connector writes events into the graph.
+5. Neo4j stores taxi zones as `Location` nodes and trips as directed `TRIP` relationships.
+6. Neo4j Graph Data Science runs weighted PageRank and breadth-first search over the projected graph.
 
 ## Features
 
-TODO: Document the implemented analytical capabilities.
+- Filtered, batched parquet ingestion
+- Property-graph modeling of taxi zones and directed trips
+- Weighted PageRank using trip distance or fare
+- Multi-target shortest-path traversal with breadth-first search semantics
+- Kafka event production and a Neo4j sink connector
+- Docker Compose environment for local graph analytics
+- Kubernetes manifests for Kafka, ZooKeeper, the connector, and Neo4j
+- Credential-free repository configuration, automated tests, and GitHub Actions CI
 
 ## Tech Stack
 
-TODO: Confirm and list the technologies used in the repository.
+- **Language and ingestion:** Python, parquet data processing
+- **Graph database:** Neo4j
+- **Graph algorithms:** Neo4j Graph Data Science, PageRank, breadth-first search
+- **Streaming:** Apache Kafka and the Neo4j Kafka connector
+- **Local environments:** Docker and Docker Compose
+- **Orchestration:** Kubernetes and Minikube
+- **Quality:** Pytest, Ruff, GitHub Actions
 
 ## Implementation
 
-TODO: Describe important implementation decisions and data transformations.
+The batch phase retains valid March 2022 trips whose pickup and drop-off zones are both in the Bronx and whose distance and fare values pass positive thresholds. It represents each zone as a `Location` node and each trip as a directed relationship containing distance, fare, pickup time, and drop-off time.
+
+The analytics interface creates the graph projection, runs PageRank with a configurable relationship weight, and supports breadth-first traversal from one start zone to multiple targets.
+
+The repository keeps its work in two clear phases: Dockerized Neo4j ingestion and analytics first, followed by the Kafka and Kubernetes streaming extension. The consolidated `main` branch includes linting, tests, and documentation for both phases.
 
 ## Challenges
 
-TODO: Document real scaling, data-quality, or modeling challenges.
+- Writing each trip individually would create avoidable database overhead, so ingestion uses filtered batches and grouped Cypher writes.
+- Running Kafka, ZooKeeper, Neo4j, and a connector locally requires deliberate resource constraints.
+- The Minikube architecture intentionally uses one Kafka broker, one ZooKeeper node, plaintext listeners, and Neo4j Community Edition to remain practical on a local machine.
+- The local configuration does not provide the replication, encrypted transport, observability, backups, or managed secrets expected in production.
 
 ## Lessons Learned
 
-TODO: Add lessons supported by the development process.
+- A graph model makes movement between zones directly available to ranking and traversal algorithms.
+- Batched ingestion is a meaningful design decision when loading relationship-heavy datasets into a graph database.
+- Separating batch analytics from the streaming extension keeps each phase understandable and independently reproducible.
+- Local Kubernetes environments are useful for validating service integration, but production readiness requires stronger security, reliability, and operational controls.
 
 ## Future Improvements
 
-TODO: Add planned improvements after the current implementation has been reviewed.
+- Add Kafka and ZooKeeper replication
+- Configure TLS/SASL for broker communication
+- Add Kubernetes network policies and managed secret handling
+- Introduce metrics, logs, and distributed observability
+- Add automated backups and schema governance
+- Evaluate managed Kafka and Neo4j services for production operation
