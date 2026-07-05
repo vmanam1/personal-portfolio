@@ -27,6 +27,19 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+On Windows PowerShell systems that block `npm.ps1`, use `npm.cmd` in the same commands—for example, `npm.cmd install` and `npm.cmd run dev`.
+
+## Production preview
+
+Build and run the optimized production application locally:
+
+```bash
+npm run build
+npm run start
+```
+
+Open `http://localhost:3000`. Stop the server with `Ctrl+C`. This does not deploy or publish the application.
+
 ## Quality gates
 
 ```bash
@@ -40,6 +53,16 @@ npm run test:e2e
 ```
 
 The GitHub Actions workflow runs the same checks without deploying.
+
+For the complete non-browser quality suite, run:
+
+```bash
+npm run check
+```
+
+For browser tests, install Chromium once with `npx playwright install chromium`, start from a free port 3000, and run `npm run test:e2e`. The browser suite covers desktop and mobile navigation, themes, accessibility, metadata, links, MDX, keyboard behavior, and runtime console errors.
+
+Use [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md) for the manual QA and design-review pass.
 
 ## Content architecture
 
