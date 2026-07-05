@@ -10,39 +10,39 @@ The values below are initial design targets and must be visually and programmati
 
 ### Light theme
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `background` | `#F7F5F0` | Warm page canvas |
-| `foreground` | `#17211F` | Primary text |
-| `surface` | `#FCFBF8` | Cards and raised sections |
-| `surface-subtle` | `#EFEEE8` | Quiet grouped regions |
-| `muted-foreground` | `#5C6663` | Secondary copy |
-| `border` | `#D8D9D3` | Dividers and controls |
-| `accent` | `#087F68` | Primary action and selected state |
-| `accent-hover` | `#066B58` | Accent interaction |
-| `accent-foreground` | `#FFFFFF` | Text on accent |
-| `focus` | `#0A8F76` | Focus ring |
-| `selection` | `#C7E9DF` | Text selection |
-| `danger` | `#B42318` | Error text/actions |
-| `danger-surface` | `#FEE4E2` | Error background |
+| Token               | Value     | Use                               |
+| ------------------- | --------- | --------------------------------- |
+| `background`        | `#F7F5F0` | Warm page canvas                  |
+| `foreground`        | `#17211F` | Primary text                      |
+| `surface`           | `#FCFBF8` | Cards and raised sections         |
+| `surface-subtle`    | `#EFEEE8` | Quiet grouped regions             |
+| `muted-foreground`  | `#5C6663` | Secondary copy                    |
+| `border`            | `#D8D9D3` | Dividers and controls             |
+| `accent`            | `#087F68` | Primary action and selected state |
+| `accent-hover`      | `#066B58` | Accent interaction                |
+| `accent-foreground` | `#FFFFFF` | Text on accent                    |
+| `focus`             | `#0A8F76` | Focus ring                        |
+| `selection`         | `#C7E9DF` | Text selection                    |
+| `danger`            | `#B42318` | Error text/actions                |
+| `danger-surface`    | `#FEE4E2` | Error background                  |
 
 ### Dark theme
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `background` | `#08111B` | Deep navy page canvas |
-| `foreground` | `#E7ECEA` | Primary text |
-| `surface` | `#0D1925` | Cards and raised sections |
-| `surface-subtle` | `#122230` | Quiet grouped regions |
-| `muted-foreground` | `#A3AFAC` | Secondary copy |
-| `border` | `#263746` | Dividers and controls |
-| `accent` | `#42C7A5` | Primary action and selected state |
-| `accent-hover` | `#68D5B9` | Accent interaction |
-| `accent-foreground` | `#061510` | Text on accent |
-| `focus` | `#5FE0BD` | Focus ring |
-| `selection` | `#164D43` | Text selection |
-| `danger` | `#FDA29B` | Error text/actions |
-| `danger-surface` | `#451A1A` | Error background |
+| Token               | Value     | Use                               |
+| ------------------- | --------- | --------------------------------- |
+| `background`        | `#08111B` | Deep navy page canvas             |
+| `foreground`        | `#E7ECEA` | Primary text                      |
+| `surface`           | `#0D1925` | Cards and raised sections         |
+| `surface-subtle`    | `#122230` | Quiet grouped regions             |
+| `muted-foreground`  | `#A3AFAC` | Secondary copy                    |
+| `border`            | `#263746` | Dividers and controls             |
+| `accent`            | `#42C7A5` | Primary action and selected state |
+| `accent-hover`      | `#68D5B9` | Accent interaction                |
+| `accent-foreground` | `#061510` | Text on accent                    |
+| `focus`             | `#5FE0BD` | Focus ring                        |
+| `selection`         | `#164D43` | Text selection                    |
+| `danger`            | `#FDA29B` | Error text/actions                |
+| `danger-surface`    | `#451A1A` | Error background                  |
 
 Accent text on the page may require the hover/lighter token in dark mode and the base/darker token in light mode. Filled-button foreground pairs must be tested independently.
 
@@ -77,16 +77,16 @@ Interactive components may derive additional roles (`input`, `ring`, `popover`, 
 
 ### Fluid scale
 
-| Token | Target definition | Typical use |
-| --- | --- | --- |
-| `text-xs` | `0.75rem / 1rem` | Compact metadata |
-| `text-sm` | `0.875rem / 1.35rem` | Labels, secondary UI |
-| `text-base` | `1rem / 1.65rem` | Default body |
-| `text-lg` | `1.125rem / 1.8rem` | Lead body |
-| `text-xl` | `1.25rem / 1.75rem` | Card title |
-| `text-2xl` | `clamp(1.5rem, 2vw, 1.875rem)` | Section title |
-| `text-3xl` | `clamp(1.875rem, 3vw, 2.5rem)` | Page title |
-| `text-4xl` | `clamp(2.5rem, 6vw, 4.75rem)` | Hero display |
+| Token       | Target definition              | Typical use          |
+| ----------- | ------------------------------ | -------------------- |
+| `text-xs`   | `0.75rem / 1rem`               | Compact metadata     |
+| `text-sm`   | `0.875rem / 1.35rem`           | Labels, secondary UI |
+| `text-base` | `1rem / 1.65rem`               | Default body         |
+| `text-lg`   | `1.125rem / 1.8rem`            | Lead body            |
+| `text-xl`   | `1.25rem / 1.75rem`            | Card title           |
+| `text-2xl`  | `clamp(1.5rem, 2vw, 1.875rem)` | Section title        |
+| `text-3xl`  | `clamp(1.875rem, 3vw, 2.5rem)` | Page title           |
+| `text-4xl`  | `clamp(2.5rem, 6vw, 4.75rem)`  | Hero display         |
 
 ### Weight and tracking
 

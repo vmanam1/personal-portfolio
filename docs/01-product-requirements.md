@@ -110,17 +110,17 @@ Only titles are currently verified. Descriptions, stacks, links, images, and cas
 
 ### Primary routes
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Positioning, current focus, selected projects, recent experience, primary calls to action |
-| `/experience` | Complete professional timeline with expandable details |
-| `/projects` | Filterable project index |
-| `/projects/[slug]` | Individual project case study |
-| `/skills` | Categorized skill inventory without ratings |
-| `/education` | Degrees, coursework, activities, and verified achievements |
-| `/resume` | Embedded preview with download and print actions |
-| `/contact` | Direct channels and a minimal contact form or mail fallback |
-| `not-found` | Helpful recovery path for unknown routes |
+| Route              | Purpose                                                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| `/`                | Positioning, current focus, selected projects, recent experience, primary calls to action |
+| `/experience`      | Complete professional timeline with expandable details                                    |
+| `/projects`        | Filterable project index                                                                  |
+| `/projects/[slug]` | Individual project case study                                                             |
+| `/skills`          | Categorized skill inventory without ratings                                               |
+| `/education`       | Degrees, coursework, activities, and verified achievements                                |
+| `/resume`          | Embedded preview with download and print actions                                          |
+| `/contact`         | Direct channels and a minimal contact form or mail fallback                               |
+| `not-found`        | Helpful recovery path for unknown routes                                                  |
 
 ### Future-ready routes
 

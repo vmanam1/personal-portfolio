@@ -15,22 +15,22 @@ No UI component imports raw files directly. Pages request normalized domain mode
 
 ## 2. Technology choices
 
-| Area | Choice | Rationale |
-| --- | --- | --- |
-| Framework | Next.js App Router | Static generation, metadata, image/font optimization, file routing, Vercel fit |
-| Language | TypeScript, strict mode | Content and component contracts fail early |
-| Styling | Tailwind CSS with CSS variables | Token-driven styling and low runtime cost |
-| Components | shadcn/ui source components | Accessible primitives remain owned and adaptable |
-| Motion | Motion for React (Framer Motion package lineage) | Limited progressive micro-interactions |
-| Content | MDX for projects; typed data modules for records | Rich case studies plus maintainable structured data |
-| Validation | Zod | Build-time validation and inferred types |
-| Theme | next-themes | Persistent system/light/dark modes without flash |
-| Icons | Lucide React | Consistent, tree-shakeable icon system |
-| Unit tests | Vitest + Testing Library | Fast domain/component behavior tests |
-| Browser tests | Playwright + axe integration | Critical journeys and automated accessibility checks |
-| Formatting/lint | Prettier + ESLint | Deterministic source quality |
-| Git hooks | Husky + lint-staged | Fast staged-file checks; CI remains authoritative |
-| Deployment | Vercel | Preview deployments and Next.js-native platform |
+| Area            | Choice                                           | Rationale                                                                      |
+| --------------- | ------------------------------------------------ | ------------------------------------------------------------------------------ |
+| Framework       | Next.js App Router                               | Static generation, metadata, image/font optimization, file routing, Vercel fit |
+| Language        | TypeScript, strict mode                          | Content and component contracts fail early                                     |
+| Styling         | Tailwind CSS with CSS variables                  | Token-driven styling and low runtime cost                                      |
+| Components      | shadcn/ui source components                      | Accessible primitives remain owned and adaptable                               |
+| Motion          | Motion for React (Framer Motion package lineage) | Limited progressive micro-interactions                                         |
+| Content         | MDX for projects; typed data modules for records | Rich case studies plus maintainable structured data                            |
+| Validation      | Zod                                              | Build-time validation and inferred types                                       |
+| Theme           | next-themes                                      | Persistent system/light/dark modes without flash                               |
+| Icons           | Lucide React                                     | Consistent, tree-shakeable icon system                                         |
+| Unit tests      | Vitest + Testing Library                         | Fast domain/component behavior tests                                           |
+| Browser tests   | Playwright + axe integration                     | Critical journeys and automated accessibility checks                           |
+| Formatting/lint | Prettier + ESLint                                | Deterministic source quality                                                   |
+| Git hooks       | Husky + lint-staged                              | Fast staged-file checks; CI remains authoritative                              |
+| Deployment      | Vercel                                           | Preview deployments and Next.js-native platform                                |
 
 Versions are selected and locked at implementation time after checking current compatibility. “Latest” never means an unreviewed prerelease.
 
