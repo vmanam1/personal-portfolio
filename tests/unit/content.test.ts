@@ -13,7 +13,7 @@ describe("portfolio content", () => {
   it("validates and returns experience in reverse chronological order", () => {
     const experience = getAllExperiences();
 
-    expect(experience).toHaveLength(7);
+    expect(experience).toHaveLength(8);
     expect(experience[0]?.id).toBe("asu-leaps-software-engineer");
   });
 

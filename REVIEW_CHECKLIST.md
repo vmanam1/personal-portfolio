@@ -79,7 +79,7 @@ Record issues with the route, viewport, theme, reproduction steps, expected resu
 - [ ] Roles are in correct reverse-chronological order.
 - [ ] Company, role, dates, location, and work mode match approved information.
 - [ ] Current-role labeling is accurate.
-- [ ] Expandable contributions work with mouse, touch, Enter, and Space.
+- [ ] Experience descriptions are complete, readable, and do not hide key details.
 - [ ] Technology badges are accurate and do not imply proficiency ratings.
 - [ ] Roles with limited supplied detail do not contain fabricated filler.
 - [ ] Long company names wrap without breaking alignment.
@@ -266,7 +266,7 @@ At each size:
 
 - [ ] Grammar, punctuation, capitalization, and terminology are consistent.
 - [ ] Voice is direct, professional, specific, and free of unsupported superlatives.
-- [ ] Role summaries and contributions match approved sources.
+- [ ] Role descriptions match approved sources.
 - [ ] Dates and locations are consistent across pages and résumé when supplied.
 - [ ] Technology names are accurate and consistently styled.
 - [ ] TODOs are easy for the owner to locate and do not read as completed claims.
