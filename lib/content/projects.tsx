@@ -53,14 +53,14 @@ export async function getAllProjects(): Promise<Project[]> {
     throw new Error("Project featuredOrder values must be unique");
   }
 
+  const displayOrders = projects.map((project) => project.displayOrder);
+  if (new Set(displayOrders).size !== displayOrders.length) {
+    throw new Error("Project displayOrder values must be unique");
+  }
+
   return projects
     .filter((project) => !project.draft)
-    .sort(
-      (a, b) =>
-        (a.featuredOrder ?? Number.POSITIVE_INFINITY) -
-          (b.featuredOrder ?? Number.POSITIVE_INFINITY) ||
-        a.title.localeCompare(b.title),
-    );
+    .sort((a, b) => a.displayOrder - b.displayOrder);
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {

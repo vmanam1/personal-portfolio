@@ -33,7 +33,15 @@ describe("portfolio content", () => {
     const featuredProjects = await getFeaturedProjects();
     const project = await getProjectBySlug("pdf-rag-pipeline");
 
-    expect(projects).toHaveLength(4);
+    expect(projects.map((item) => item.slug)).toEqual([
+      "pdf-rag-pipeline",
+      "nyc-data-analytics-pipeline",
+      "arizona-power-outage-archive",
+      "django-blog-platform",
+      "customer-churn-prediction",
+      "automatic-license-plate-detection",
+      "authentication-portal",
+    ]);
     expect(featuredProjects.map((item) => item.slug)).toEqual([
       "pdf-rag-pipeline",
       "nyc-data-analytics-pipeline",

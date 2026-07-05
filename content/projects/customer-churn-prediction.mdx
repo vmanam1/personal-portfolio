@@ -1,0 +1,94 @@
+---
+title: Customer Churn Prediction
+slug: customer-churn-prediction
+summary: An end-to-end data-mining study that preprocesses customer data, engineers behavioral and financial features, and compares classical, ensemble, and neural models for churn prediction.
+status: Complete
+publishedAt: 2025-12
+updatedAt: 2026-07
+displayOrder: 5
+featuredOrder: null
+draft: false
+tags:
+  - Machine Learning
+  - Data Mining
+  - Academic
+technologies:
+  - Python
+  - Jupyter
+  - scikit-learn
+  - XGBoost
+  - LightGBM
+  - CatBoost
+repositoryUrl: https://github.com/vmanam1/cse572
+demoUrl: null
+---
+
+## Overview
+
+Customer Churn Prediction is a CSE 572 Data Mining group project developed with Madhuri Chandanala at Arizona State University. The project builds an end-to-end machine-learning workflow for identifying customers who are likely to leave a subscription service using demographic, behavioral, financial, support, and contract data.
+
+The repository organizes the work across data-processing and experiment notebooks, with a final report documenting the methodology and findings.
+
+## Problem
+
+Customer churn affects recurring revenue and retention planning, but the available datasets combine categorical, numerical, behavioral, and account-level signals. The project needed to turn those mixed inputs into consistent model-ready features and compare a broad set of algorithms using metrics that account for more than overall accuracy.
+
+## Solution
+
+The pipeline cleans missing and irrelevant values, encodes categorical variables, scales numerical features, and creates train-test splits. It adds domain-specific indicators for contract type, support-call intensity, payment reliability, and tenure before training classical classifiers, gradient-boosting ensembles, and a multi-layer perceptron.
+
+Models are compared with accuracy, precision, recall, F1-score, and ROC-AUC. According to the repository's reported experiments, XGBoost, LightGBM, CatBoost, and the MLP were the strongest approaches, exceeding 98% accuracy and F1-score across the evaluated datasets.
+
+## Architecture
+
+1. Source customer datasets provide demographic, service, contract, support, and financial attributes.
+2. A preprocessing notebook cleans values, removes identifiers, encodes categories, and scales numerical features.
+3. Feature engineering derives contract, support, payment-delay, and tenure indicators.
+4. Experiment notebooks train classical, ensemble, SVM, and neural models.
+5. Evaluation compares classification metrics and behavior across the primary and external datasets.
+6. The final report consolidates methodology, results, and conclusions.
+
+## Features
+
+- Exploratory data analysis and preprocessing
+- Domain-informed churn feature engineering
+- Logistic regression, decision tree, and random forest baselines
+- Linear and RBF support-vector machine experiments
+- XGBoost, LightGBM, and CatBoost models
+- Multi-layer perceptron experiments
+- Multi-metric evaluation across multiple churn datasets
+
+## Tech Stack
+
+- **Analysis:** Python, Jupyter Notebook, pandas, NumPy
+- **Machine learning:** scikit-learn, XGBoost, LightGBM, CatBoost
+- **Evaluation:** Accuracy, precision, recall, F1-score, ROC-AUC
+- **Visualization:** Matplotlib and related notebook tooling
+
+## Implementation
+
+The repository separates dataset preparation from model experiments. `datasetProcessing.ipynb` handles cleaning and feature engineering, while checkpoint notebooks cover general models and dedicated SVM experiments. This structure keeps transformed data work distinct from model comparison and makes the academic checkpoints traceable.
+
+The comparison intentionally spans interpretable baselines and higher-capacity methods rather than presenting one algorithm in isolation. External telecom and Kaggle churn datasets provide an additional check on model behavior beyond a single source dataset.
+
+## Challenges
+
+- Mixed categorical and numerical features require consistent preprocessing before fair model comparison.
+- Churn evaluation needs precision, recall, F1, and ROC-AUC context because accuracy alone can hide class-specific weaknesses.
+- Comparing many model families requires controlled train-test preparation and consistent metrics.
+- The repository's exported environment file is broader than the project requires and would benefit from a minimal reproducible dependency set.
+
+## Lessons Learned
+
+- Domain-informed features can make customer behavior more meaningful to general-purpose classifiers.
+- Baselines provide essential context when evaluating more complex ensemble and neural approaches.
+- Multiple metrics are necessary for a defensible classification comparison.
+- Separating preprocessing and experimentation improves the traceability of notebook-based research.
+
+## Future Improvements
+
+- Replace the exported environment with a minimal locked dependency file
+- Add reusable Python modules and automated tests around preprocessing
+- Add cross-validation and confidence intervals for model comparisons
+- Document class balance and threshold-selection behavior in more detail
+- Add model explainability with feature importance or SHAP analysis

@@ -1,0 +1,97 @@
+---
+title: Authentication Portal
+slug: authentication-portal
+summary: A legacy PHP and MySQL account portal with registration, login, email verification, password recovery, profile updates, and a separate administrative interface.
+status: Complete
+publishedAt: 2022-08
+updatedAt: 2026-07
+displayOrder: 7
+featuredOrder: null
+draft: false
+tags:
+  - Web
+  - Authentication
+  - Legacy Project
+technologies:
+  - PHP
+  - MySQL
+  - Bootstrap
+  - JavaScript
+  - SwiftMailer
+  - XAMPP
+repositoryUrl: https://github.com/VishalManam/authentication-portal
+demoUrl: null
+---
+
+## Overview
+
+Authentication Portal is an early PHP and MySQL project that implements account registration and login alongside email verification, password recovery, editable profile information, and a separate administrator interface.
+
+The project was designed to run locally with XAMPP and uses server-rendered PHP pages, Bootstrap styling, MySQL persistence, PHP sessions, and SwiftMailer for account emails.
+
+## Problem
+
+The project explored the common account-management requirements behind an organization portal: collecting user details, preventing duplicate accounts, authenticating returning users, verifying email ownership, recovering forgotten passwords, maintaining session state, and separating user and administrator views.
+
+## Solution
+
+PHP controllers validate submitted registration fields, check username, email, and phone-number uniqueness, hash passwords with PHP's password API, generate random account tokens, and persist records in MySQL. Session values carry authenticated user state between pages.
+
+Email flows send verification and password-reset links through SwiftMailer. Authenticated users can update their username, phone number, graduation year, and password, while a separate admin area provides its own login and user-facing administration pages.
+
+## Architecture
+
+1. Bootstrap-based PHP forms collect registration, login, recovery, and profile data.
+2. A shared authentication controller validates requests and manages PHP sessions.
+3. MySQL stores users, hashed passwords, verification state, and account tokens.
+4. SwiftMailer sends verification and password-reset messages.
+5. User-panel pages expose account and profile workflows.
+6. A separate admin-panel directory handles administrator login and management views.
+
+## Features
+
+- User registration with duplicate-field checks
+- Password hashing and session-based login
+- Email verification tokens
+- Forgot-password and password-reset flow
+- Username, phone number, graduation year, and password updates
+- Separate user and administrator interfaces
+- Bootstrap-based responsive form styling
+
+## Tech Stack
+
+- **Backend:** PHP
+- **Database:** MySQL
+- **Interface:** HTML, CSS, Bootstrap, JavaScript
+- **Email:** SwiftMailer 6
+- **Local environment:** XAMPP
+
+## Implementation
+
+The user panel centralizes registration, login, recovery, and account-update actions in `authControllers.php`. Registration uses prepared insertion statements and PHP's `password_hash`, while login checks credentials with `password_verify`. Random tokens support verification and reset links.
+
+Individual PHP pages separate the login, registration, verification, reset, authenticated profile, and account-editing views. The administrator functionality lives under its own directory with separate login, validation, and table pages.
+
+## Challenges
+
+- Authentication combines validation, persistence, sessions, email delivery, and navigation across many server-rendered requests.
+- Duplicate identifiers need to be rejected before inserting a new account.
+- Recovery and verification links require unpredictable tokens and clear state transitions.
+- As an early project, the code mixes parameterized statements with interpolated SQL and would require a security review before any modern deployment.
+
+## Lessons Learned
+
+- Passwords should be stored through dedicated hashing APIs rather than reversible encryption or plain text.
+- Authentication workflows are easier to maintain when validation, persistence, and presentation concerns are separated.
+- Email verification and password recovery introduce state that must be modeled explicitly.
+- Legacy projects are useful evidence of growth when their limitations are documented honestly.
+
+## Future Improvements
+
+- Use prepared statements for every database query
+- Add CSRF protection, secure cookie settings, rate limiting, and session rotation
+- Move database and email configuration into environment variables
+- Separate request handling into controllers, services, repositories, and templates
+- Replace the unsupported SwiftMailer dependency with a maintained mail library
+- Add automated authentication, authorization, and security tests
+- Containerize the application and document database migrations

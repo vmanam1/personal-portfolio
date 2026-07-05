@@ -14,6 +14,7 @@ export const projectFrontmatterSchema = z.object({
   status: z.enum(["Project details pending", "Active", "Complete", "Archived"]),
   publishedAt: yearMonthSchema,
   updatedAt: yearMonthSchema,
+  displayOrder: z.number().int().positive(),
   featuredOrder: z.number().int().positive().nullable(),
   draft: z.boolean(),
   tags: z.array(z.string().min(1)),
