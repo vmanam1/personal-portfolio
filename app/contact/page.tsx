@@ -1,6 +1,7 @@
 import { ArrowUpRight, Code2, UserRound } from "lucide-react";
 import type { Metadata } from "next";
 
+import { MotionLift } from "@/components/motion/motion-lift";
 import { PageHeader } from "@/components/shared/page-header";
 import { siteConfig } from "@/content/config/site";
 
@@ -34,28 +35,29 @@ export default function ContactPage() {
       />
       <div className="site-container section-space grid gap-6 md:grid-cols-2">
         {channels.map(({ label, description, href, icon: Icon }) => (
-          <a
-            key={href}
-            href={href}
-            target="_blank"
-            rel="noreferrer"
-            className="group relative rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-[border-color,transform] outline-none hover:border-accent/50 focus-visible:ring-2 focus-visible:ring-focus motion-safe:hover:-translate-y-0.5 sm:p-8"
-          >
-            <div className="flex items-start justify-between gap-6">
-              <span className="grid size-11 place-items-center rounded-[var(--radius-sm)] border border-border bg-surface-subtle">
-                <Icon className="size-5 text-accent" aria-hidden />
-              </span>
-              <ArrowUpRight
-                className="size-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden
-              />
-            </div>
-            <h2 className="mt-10 text-2xl font-semibold">{label}</h2>
-            <p className="mt-2 leading-7 text-muted-foreground">
-              {description}
-            </p>
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
+          <MotionLift key={href}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative block h-full rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-colors outline-none hover:border-accent/50 focus-visible:ring-2 focus-visible:ring-focus sm:p-8"
+            >
+              <div className="flex items-start justify-between gap-6">
+                <span className="grid size-11 place-items-center rounded-[var(--radius-sm)] border border-border bg-surface-subtle">
+                  <Icon className="size-5 text-accent" aria-hidden />
+                </span>
+                <ArrowUpRight
+                  className="size-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden
+                />
+              </div>
+              <h2 className="mt-10 text-2xl font-semibold">{label}</h2>
+              <p className="mt-2 leading-7 text-muted-foreground">
+                {description}
+              </p>
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          </MotionLift>
         ))}
         <section className="border-t border-border pt-8 md:col-span-2">
           <h2 className="text-lg font-semibold">Email and contact form</h2>

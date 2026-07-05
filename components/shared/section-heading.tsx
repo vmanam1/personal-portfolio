@@ -29,6 +29,7 @@ export function SectionHeading({
       {href && linkLabel ? (
         <Link
           href={href}
+          prefetch={false}
           className="w-fit rounded-sm text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-focus"
         >
           {linkLabel} <span aria-hidden>→</span>

@@ -15,7 +15,8 @@
   --color-focus: var(--color-focus);
   --color-danger: var(--color-danger);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono:
+    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 :root {
@@ -107,7 +108,8 @@ button:not(:disabled),
 
 .eyebrow {
   color: var(--color-accent);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family:
+    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;

@@ -30,12 +30,12 @@ export default async function HomePage() {
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/projects">
+              <Link href="/projects" prefetch={false}>
                 View projects <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/resume">
+              <Link href="/resume" prefetch={false}>
                 <FileText className="size-4" aria-hidden /> Résumé
               </Link>
             </Button>

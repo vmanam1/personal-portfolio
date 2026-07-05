@@ -35,6 +35,7 @@ function NavigationLink({
   return (
     <Link
       href={href}
+      prefetch={false}
       onClick={onNavigate}
       aria-current={current ? "page" : undefined}
       className={cn(
@@ -63,7 +64,7 @@ export function SiteHeader() {
       <div className="site-container flex h-16 items-center justify-between gap-4">
         <Link
           href="/"
-          aria-label={`${siteConfig.name}, home`}
+          prefetch={false}
           className="flex items-center gap-3 rounded-[var(--radius-sm)] outline-none focus-visible:ring-2 focus-visible:ring-focus"
         >
           <span className="grid size-8 place-items-center rounded-[var(--radius-sm)] border border-accent/40 bg-accent/10 font-mono text-xs font-semibold text-accent">
@@ -72,6 +73,7 @@ export function SiteHeader() {
           <span className="hidden text-sm font-semibold sm:inline">
             {siteConfig.name}
           </span>
+          <span className="sr-only">, home</span>
         </Link>
 
         <nav
