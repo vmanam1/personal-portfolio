@@ -7,6 +7,10 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en_US",
   email: null,
+  resume: {
+    path: null,
+    updatedAt: null,
+  },
   social: {
     github: "https://github.com/vmanam1",
     linkedin: "https://www.linkedin.com/in/vishal-manam/",
