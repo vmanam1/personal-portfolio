@@ -11,7 +11,7 @@ export const projectFrontmatterSchema = z.object({
   title: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   summary: z.string().min(1),
-  status: z.enum(["Project details pending", "Active", "Complete", "Archived"]),
+  status: z.enum(["Active", "Complete", "Archived"]),
   publishedAt: yearMonthSchema,
   updatedAt: yearMonthSchema,
   displayOrder: z.number().int().positive(),

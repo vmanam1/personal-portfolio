@@ -98,7 +98,7 @@ export default async function HomePage() {
         <SectionHeading
           eyebrow="Selected projects"
           title="Building beyond the interface."
-          description="Personal and academic projects spanning AI, data, and energy systems. Missing details remain explicitly marked until they are verified."
+          description="Personal and academic projects spanning AI, data, energy systems, computer vision, and full-stack development."
           href="/projects"
           linkLabel="View all projects"
         />

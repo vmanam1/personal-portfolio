@@ -270,7 +270,7 @@ At each size:
 - [ ] Dates and locations are consistent across pages and résumé when supplied.
 - [ ] Technology names are accurate and consistently styled.
 - [ ] TODOs are easy for the owner to locate and do not read as completed claims.
-- [ ] Missing project details, screenshots, demo URLs, email, and résumé remain explicit.
+- [ ] Project descriptions, screenshots, links, email, and résumé information are complete and accurate.
 - [ ] No fabricated metrics, achievements, screenshots, experience, or technologies appear.
 
 ## Overall design assessment
