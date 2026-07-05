@@ -21,6 +21,9 @@ export const educationContent = [
       "Statistical Learning Theory",
       "Advanced Computer Network Security",
     ],
+    activities: [
+      "Assembly Member at Graduate Student Government, representing the Ira A. Fulton Schools of Engineering",
+    ],
     achievements: [],
     links: [],
   },
@@ -95,6 +98,7 @@ export const educationContent = [
       "Software Testing",
       "Research Project",
     ],
+    activities: ["Cloud Computing Lead at GDG on Campus, IIIT-Bh"],
     achievements: [],
     links: [],
   },

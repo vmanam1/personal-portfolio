@@ -11,6 +11,7 @@ export const educationSchema = z.object({
   endDate: yearMonthSchema,
   location: z.string().min(1),
   coursework: z.array(z.string().min(1)),
+  activities: z.array(z.string().min(1)),
   achievements: z.array(z.string().min(1)),
   links: z.array(externalLinkSchema),
 });
