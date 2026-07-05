@@ -46,6 +46,14 @@ describe("portfolio content", () => {
       "pdf-rag-pipeline",
       "nyc-data-analytics-pipeline",
     ]);
+    const skills = new Set(getSkillGroups().flatMap((group) => group.skills));
+    const projectTechnologies = new Set(
+      projects.flatMap((item) => item.technologies),
+    );
+
+    expect(
+      [...projectTechnologies].filter((technology) => !skills.has(technology)),
+    ).toEqual([]);
     expect(project?.title).toBe("PDF RAG Pipeline");
   });
 });
