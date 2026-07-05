@@ -195,7 +195,7 @@ Circular imports and imports from `app/` into reusable modules are prohibited.
 
 1. Copy `content/projects/_template.mdx` to a unique slug.
 2. Complete validated frontmatter.
-3. Write only evidence-based case-study sections.
+3. Write only evidence-based project sections.
 4. Place approved assets in `public/images/projects/<slug>/`.
 5. Run content validation and tests.
 6. Preview themes, responsive layouts, keyboard navigation, metadata, and social image.

@@ -88,7 +88,7 @@ Record issues with the route, viewport, theme, reproduction steps, expected resu
 
 - [ ] All four projects appear exactly once.
 - [ ] Titles and GitHub destinations are correct.
-- [ ] Missing screenshots use the deliberate case-study treatment, not fake imagery.
+- [ ] Missing screenshots use the deliberate project treatment, not fake imagery.
 - [ ] Cards remain aligned with short and long summaries.
 - [ ] Card hover, focus, and touch behavior provide equivalent access.
 - [ ] The entire intended card link area is usable without invalid nested links.

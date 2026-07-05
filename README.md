@@ -66,7 +66,7 @@ Use [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md) for the manual QA and design-
 
 ## Content architecture
 
-- `content/projects/*.mdx`: project frontmatter and case-study content
+- `content/projects/*.mdx`: project frontmatter and detailed project content
 - `content/experience`: professional history
 - `content/education`: degrees and coursework
 - `content/skills`: categorized technologies
@@ -74,7 +74,14 @@ Use [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md) for the manual QA and design-
 - `lib/schemas`: build-time Zod validation
 - `lib/content`: content queries and normalization
 
-Adding a project requires one MDX file. The project index, detail route, sitemap, and home-page feature grid derive from validated content automatically.
+Adding a project requires one MDX file:
+
+1. Copy `content/projects/_template.mdx` to `content/projects/<slug>.mdx`.
+2. Make the filename and frontmatter `slug` identical.
+3. Complete the frontmatter and project sections, then set `draft: false`.
+4. Use `featuredOrder: null` for the Projects page only, or a unique positive number to feature and order it on the homepage.
+
+The project index, detail route, sitemap, and homepage list update automatically without component changes.
 
 ## Documentation
 
