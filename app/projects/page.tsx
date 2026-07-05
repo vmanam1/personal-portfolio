@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ProjectCard } from "@/components/projects/project-card";
+import { FeaturedProjectItem } from "@/components/projects/featured-project-item";
 import { PageHeader } from "@/components/shared/page-header";
 import { getAllProjects } from "@/lib/content/projects";
 
@@ -20,9 +20,14 @@ export default async function ProjectsPage() {
         title="Systems, pipelines, and products."
         description="Selected personal and academic engineering projects. Missing details are marked clearly rather than inferred."
       />
-      <div className="wide-container section-space grid gap-6 md:grid-cols-2">
-        {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+      <div className="site-container section-space">
+        {projects.map((project, index) => (
+          <FeaturedProjectItem
+            key={project.slug}
+            project={project}
+            index={index}
+            headingLevel={2}
+          />
         ))}
       </div>
     </>

@@ -7,10 +7,14 @@ import type { ProjectFrontmatter } from "@/lib/schemas/project";
 export function FeaturedProjectItem({
   project,
   index,
+  headingLevel = 3,
 }: {
   project: ProjectFrontmatter;
   index: number;
+  headingLevel?: 2 | 3;
 }) {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
+
   return (
     <article className="group relative grid gap-5 border-t border-border py-8 first:border-t-0 first:pt-0 md:grid-cols-[10rem_1fr] md:gap-10">
       <div className="font-mono text-xs leading-6 text-muted-foreground uppercase">
@@ -22,7 +26,7 @@ export function FeaturedProjectItem({
             <Badge key={tag}>{tag}</Badge>
           ))}
         </div>
-        <h3 className="mt-4 text-2xl font-semibold tracking-tight">
+        <Heading className="mt-4 text-2xl font-semibold tracking-tight">
           <Link
             href={`/projects/${project.slug}`}
             prefetch={false}
@@ -30,7 +34,7 @@ export function FeaturedProjectItem({
           >
             {project.title}
           </Link>
-        </h3>
+        </Heading>
         <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">
           {project.summary}
         </p>
