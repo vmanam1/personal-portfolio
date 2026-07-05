@@ -2,13 +2,18 @@ import { ArrowRight, FileText } from "lucide-react";
 import Link from "next/link";
 
 import { ExperienceItem } from "@/components/experience/experience-item";
+import { ProjectCard } from "@/components/projects/project-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/content/config/site";
 import { getFeaturedExperiences } from "@/lib/content/experience";
+import { getAllProjects } from "@/lib/content/projects";
 
-export default function HomePage() {
+export default async function HomePage() {
   const featuredExperience = getFeaturedExperiences().slice(0, 3);
+  const featuredProjects = (await getAllProjects())
+    .filter((project) => project.featured)
+    .slice(0, 3);
 
   return (
     <>
@@ -68,16 +73,33 @@ export default function HomePage() {
 
       <section className="site-container section-space">
         <SectionHeading
-          eyebrow="Experience"
-          title="Engineering across systems and environments."
-          description="Selected roles spanning intelligent energy, edge computer vision, data processing, and digital solutions."
-          href="/experience"
-          linkLabel="View all experience"
+          eyebrow="Selected projects"
+          title="Building beyond the interface."
+          description="Case studies spanning AI, data, and energy systems. Project details remain explicitly marked while documentation is completed."
+          href="/projects"
+          linkLabel="View all projects"
         />
-        <div className="mt-14">
-          {featuredExperience.map((experience) => (
-            <ExperienceItem key={experience.id} experience={experience} />
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-border">
+        <div className="site-container section-space">
+          <SectionHeading
+            eyebrow="Experience"
+            title="Engineering across systems and environments."
+            description="Selected roles spanning intelligent energy, edge computer vision, data processing, and digital solutions."
+            href="/experience"
+            linkLabel="View all experience"
+          />
+          <div className="mt-14">
+            {featuredExperience.map((experience) => (
+              <ExperienceItem key={experience.id} experience={experience} />
+            ))}
+          </div>
         </div>
       </section>
     </>
