@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,cjs,json,md,mdx,css,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,mjs,cjs,json,md,mdx,css,yml,yaml}\"",
+    "audit": "npm audit --audit-level=moderate",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
@@ -50,6 +51,7 @@
     "husky": "latest",
     "jsdom": "latest",
     "lint-staged": "latest",
+    "postcss": "^8.5.16",
     "prettier": "latest",
     "prettier-plugin-tailwindcss": "latest",
     "tailwindcss": "latest",
@@ -62,5 +64,8 @@
       "prettier --write"
     ],
     "*.{json,md,mdx,css,yml,yaml}": "prettier --write"
+  },
+  "overrides": {
+    "postcss": "$postcss"
   }
 }
