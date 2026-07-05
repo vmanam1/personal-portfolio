@@ -18,7 +18,13 @@ describe("portfolio content", () => {
   });
 
   it("validates education and skills", () => {
-    expect(getAllEducation()).toHaveLength(2);
+    const education = getAllEducation();
+
+    expect(education).toHaveLength(2);
+    expect(
+      education.find((item) => item.id === "iiit-bhubaneswar-btech-it")
+        ?.coursework,
+    ).toHaveLength(60);
     expect(getSkillGroups()).toHaveLength(8);
   });
 
