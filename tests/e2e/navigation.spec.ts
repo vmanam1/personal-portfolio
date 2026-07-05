@@ -9,7 +9,7 @@ test("navigates through primary portfolio routes", async ({ page }) => {
   await page.getByRole("link", { name: "View projects" }).click();
   await expect(page).toHaveURL(/\/projects$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Systems, pipelines, and products.",
+    "Building software with real-world impact.",
   );
 
   await page.getByRole("link", { name: "PDF RAG Pipeline" }).click();

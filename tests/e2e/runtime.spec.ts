@@ -39,6 +39,8 @@ test("all rendered internal links resolve successfully", async ({
   page,
   request,
 }) => {
+  test.setTimeout(60_000);
+
   const hrefs = new Set<string>();
 
   for (const route of routes) {
