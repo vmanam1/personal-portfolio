@@ -1,4 +1,4 @@
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, FileText, MapPin } from "lucide-react";
 import Link from "next/link";
 import { FaGithub, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { SiLetterboxd } from "react-icons/si";
@@ -48,6 +48,10 @@ export default async function HomePage() {
             Master’s in Computer Science from Arizona State University, I’m
             focused on building scalable software systems with an emphasis on
             performance, maintainability, and clean engineering.
+          </p>
+          <p className="mt-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+            <MapPin className="size-3.5 shrink-0" aria-hidden />
+            Seattle, WA
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild>
