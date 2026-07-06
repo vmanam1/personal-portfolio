@@ -79,7 +79,7 @@ Record issues with the route, viewport, theme, reproduction steps, expected resu
 - [ ] Roles are in correct reverse-chronological order.
 - [ ] Company, role, dates, location, and work mode match approved information.
 - [ ] Current-role labeling is accurate.
-- [ ] Expandable contributions work with mouse, touch, Enter, and Space.
+- [ ] Experience descriptions are complete, readable, and do not hide key details.
 - [ ] Technology badges are accurate and do not imply proficiency ratings.
 - [ ] Roles with limited supplied detail do not contain fabricated filler.
 - [ ] Long company names wrap without breaking alignment.
@@ -88,7 +88,7 @@ Record issues with the route, viewport, theme, reproduction steps, expected resu
 
 - [ ] All four projects appear exactly once.
 - [ ] Titles and GitHub destinations are correct.
-- [ ] Missing screenshots use the deliberate case-study treatment, not fake imagery.
+- [ ] Missing screenshots use the deliberate project treatment, not fake imagery.
 - [ ] Cards remain aligned with short and long summaries.
 - [ ] Card hover, focus, and touch behavior provide equivalent access.
 - [ ] The entire intended card link area is usable without invalid nested links.
@@ -266,11 +266,11 @@ At each size:
 
 - [ ] Grammar, punctuation, capitalization, and terminology are consistent.
 - [ ] Voice is direct, professional, specific, and free of unsupported superlatives.
-- [ ] Role summaries and contributions match approved sources.
+- [ ] Role descriptions match approved sources.
 - [ ] Dates and locations are consistent across pages and résumé when supplied.
 - [ ] Technology names are accurate and consistently styled.
 - [ ] TODOs are easy for the owner to locate and do not read as completed claims.
-- [ ] Missing project details, screenshots, demo URLs, email, and résumé remain explicit.
+- [ ] Project descriptions, screenshots, links, email, and résumé information are complete and accurate.
 - [ ] No fabricated metrics, achievements, screenshots, experience, or technologies appear.
 
 ## Overall design assessment

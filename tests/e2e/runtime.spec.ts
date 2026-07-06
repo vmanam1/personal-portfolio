@@ -5,6 +5,9 @@ const routes = [
   "/experience",
   "/projects",
   "/projects/arizona-power-outage-archive",
+  "/projects/authentication-portal",
+  "/projects/automatic-license-plate-detection",
+  "/projects/customer-churn-prediction",
   "/projects/django-blog-platform",
   "/projects/nyc-data-analytics-pipeline",
   "/projects/pdf-rag-pipeline",
@@ -36,6 +39,8 @@ test("all rendered internal links resolve successfully", async ({
   page,
   request,
 }) => {
+  test.setTimeout(60_000);
+
   const hrefs = new Set<string>();
 
   for (const route of routes) {
@@ -56,9 +61,7 @@ test("all rendered internal links resolve successfully", async ({
   }
 });
 
-test("project MDX renders the complete case-study structure", async ({
-  page,
-}) => {
+test("project MDX renders the complete project structure", async ({ page }) => {
   await page.goto("/projects/pdf-rag-pipeline");
 
   const sections = [

@@ -94,11 +94,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
               </Button>
-            ) : (
-              <span className="inline-flex min-h-11 items-center rounded-[var(--radius-sm)] border border-border px-4 text-sm text-muted-foreground">
-                Live demo · TODO
-              </span>
-            )}
+            ) : null}
           </div>
         </div>
       </header>

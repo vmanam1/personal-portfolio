@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 
 import { siteConfig } from "@/content/config/site";
 
 const socialLinks = [
-  { href: siteConfig.social.github, label: "GitHub" },
-  { href: siteConfig.social.linkedin, label: "LinkedIn" },
+  { href: siteConfig.social.github, label: "GitHub", icon: FaGithub },
+  { href: siteConfig.social.linkedin, label: "LinkedIn", icon: FaLinkedin },
 ] as const;
 
 export function SiteFooter() {
@@ -14,18 +15,19 @@ export function SiteFooter() {
         <div>
           <p className="text-sm font-medium">{siteConfig.name}</p>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">
-            {siteConfig.description}
+            {siteConfig.footerDescription}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          {socialLinks.map(({ href, label }) => (
+        <div className="flex items-center gap-5">
+          {socialLinks.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-border px-3 text-sm text-muted-foreground outline-none hover:border-accent/50 hover:text-foreground focus-visible:ring-2 focus-visible:ring-focus"
+              className="inline-flex min-h-11 items-center gap-2 rounded-sm text-sm text-muted-foreground underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-focus"
             >
+              <Icon className="size-4 shrink-0" aria-hidden focusable={false} />
               {label}
               <span className="sr-only">(opens in a new tab)</span>
             </Link>

@@ -14,8 +14,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.title}`,
-    template: `%s — ${siteConfig.name}`,
+    default: siteConfig.name,
+    template: "%s",
   },
   description: siteConfig.description,
   authors: [{ name: siteConfig.name, url: siteConfig.social.linkedin }],

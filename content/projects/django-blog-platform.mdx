@@ -1,57 +1,104 @@
 ---
-title: Django Blog Platform
+title: Django Blogging Platform
 slug: django-blog-platform
-summary: A project case study for a Django-based publishing platform. Technical details are being prepared.
-status: Case study in progress
+summary: A server-rendered publishing platform modernized with secure authentication, object-level authorization, automated testing, CI, PostgreSQL, and optional Amazon S3 media storage.
+status: Complete
 publishedAt: 2026-07
 updatedAt: 2026-07
-featured: false
+displayOrder: 4
+featuredOrder: null
 draft: false
 tags:
   - Web
   - Backend
+  - Cloud
 technologies:
+  - Python
   - Django
+  - PostgreSQL
+  - Bootstrap
+  - Amazon S3
+  - GitHub Actions
+  - Gunicorn
+  - WhiteNoise
 repositoryUrl: https://github.com/vmanam1/django-blog-page
-demoUrl: null
+demoUrl: https://django-blog-bqma.onrender.com/
 ---
 
 ## Overview
 
-TODO: Add the approved project overview and intended publishing workflow.
+Django Blogging Platform is a server-rendered application where users can register, manage a profile, publish posts, browse posts by author, and edit or delete only their own content. The project began during the third year of my B.Tech and was modernized in 2026 to reflect stronger practices in security, testing, dependency management, continuous integration, and production configuration.
+
+The modernization retained the core Django architecture while upgrading the application to Django 5.2 LTS and a Python 3.12-compatible dependency stack.
 
 ## Problem
 
-TODO: Describe the specific product problem and requirements.
+The original college project demonstrated the central blogging workflow, but its repository and configuration did not meet current expectations for a safe, reproducible portfolio application. Credentials and runtime artifacts needed to be removed, dependencies needed modernization, and the application required stronger authorization, testing, environment management, and deployment configuration.
 
 ## Solution
 
-TODO: Explain the verified Django application design and user flows.
+The application was upgraded without replacing its server-rendered Django design. Configuration now comes from environment variables with safe local defaults, SQLite remains available for development, and `DATABASE_URL` enables PostgreSQL in production.
+
+Authentication flows, post ownership checks, profile creation, duplicate-email handling, static assets, uploaded media, and health monitoring were hardened. Automated tests, Ruff checks, and GitHub Actions now verify the primary account and publishing workflows.
 
 ## Architecture
 
-TODO: Add the application layers, data model, request flow, and architecture diagram.
+1. Gunicorn or Django's development server receives the browser request.
+2. Project and application URL configurations route account, blog, admin, and health-check traffic.
+3. Class-based views enforce authentication and object ownership where required.
+4. Django's ORM reads and writes `User`, `Profile`, and `Post` records.
+5. Django templates and Bootstrap render the response.
+6. WhiteNoise serves versioned static files; uploaded profile media can use local storage or Amazon S3.
+7. SQLite supports local development, while PostgreSQL is configured through `DATABASE_URL` for production.
 
 ## Features
 
-TODO: Document the implemented publishing and administration capabilities.
+- Registration, login, POST-only logout, and password reset
+- One-to-one user profiles with profile images
+- Create, read, update, and delete workflows for posts
+- Object-level authorization for updates and deletion
+- Paginated home and author views
+- Case-insensitive unique email validation
+- Local or optional Amazon S3 uploaded-media storage
+- Console or configurable SMTP email delivery
+- Health endpoint, automated tests, Ruff checks, and GitHub Actions CI
 
 ## Tech Stack
 
-TODO: Confirm the complete technology stack used in the repository.
+- **Application:** Python 3.12, Django 5.2 LTS, Django Templates
+- **Interface:** Bootstrap 5.3, Crispy Forms
+- **Data:** SQLite for development, PostgreSQL for production
+- **Static and media:** WhiteNoise, optional Amazon S3 through `django-storages`
+- **Serving:** Gunicorn
+- **Quality:** Django test framework, Ruff, GitHub Actions
+- **Production configuration:** Render Blueprint and Neon-compatible PostgreSQL
 
 ## Implementation
 
-TODO: Describe important implementation decisions and supporting code paths.
+The `blog` application owns posts and public content-management views. Each post belongs to a Django user, and deleting that user cascades to the associated posts. The `users` application owns profiles, registration, and profile forms; a post-save signal creates one profile for each new user.
+
+Public visitors can read posts. Creating content requires authentication, while update and delete views combine `LoginRequiredMixin` with `UserPassesTestMixin` to compare the active user with the post author. CSRF tokens protect state-changing forms, including logout.
+
+Production settings enable secure cookies and proxy-aware HTTPS behavior, fail startup when a production secret is missing, and derive allowed hosts from explicit environment configuration. A health endpoint supports service monitoring.
 
 ## Challenges
 
-TODO: Document real engineering challenges and how they were handled.
+- Modernizing the repository required removing credentials, the development database, uploaded files, and generated bytecode from public history.
+- Supporting both convenient local development and safer production behavior required environment-aware database, email, storage, and security settings.
+- User-facing authorization needed object-level checks rather than authentication alone.
+- Uploaded files are not durable on an ephemeral application filesystem, so production persistence requires external storage such as S3.
 
 ## Lessons Learned
 
-TODO: Add lessons supported by the development process.
+- Modernization can preserve a project's original architecture while substantially improving its security and operability.
+- Authentication and authorization are separate concerns; an authenticated user still needs ownership checks for protected objects.
+- Safe defaults and explicit production validation reduce configuration mistakes without making local setup cumbersome.
+- Automated tests and CI make security-sensitive workflow changes easier to maintain.
 
 ## Future Improvements
 
-TODO: Add planned improvements after the current implementation has been reviewed.
+- Add email ownership verification
+- Add drafts, tags, search, comments, and rich-text editing
+- Add API endpoints and a separate client interface
+- Add image resizing and asynchronous background processing
+- Add rate limiting, social authentication, and browser-level end-to-end tests

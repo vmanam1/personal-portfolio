@@ -34,7 +34,9 @@ async function compileProject(filename: string): Promise<Project> {
 export async function getProjectSlugs(): Promise<string[]> {
   const filenames = await readdir(projectsDirectory);
   return filenames
-    .filter((filename) => filename.endsWith(".mdx"))
+    .filter(
+      (filename) => filename.endsWith(".mdx") && !filename.startsWith("_"),
+    )
     .map((filename) => filename.slice(0, -4));
 }
 
@@ -44,13 +46,27 @@ export async function getAllProjects(): Promise<Project[]> {
     slugs.map((slug) => compileProject(`${slug}.mdx`)),
   );
 
+  const featuredOrders = projects.flatMap((project) =>
+    project.featuredOrder === null ? [] : [project.featuredOrder],
+  );
+  if (new Set(featuredOrders).size !== featuredOrders.length) {
+    throw new Error("Project featuredOrder values must be unique");
+  }
+
+  const displayOrders = projects.map((project) => project.displayOrder);
+  if (new Set(displayOrders).size !== displayOrders.length) {
+    throw new Error("Project displayOrder values must be unique");
+  }
+
   return projects
     .filter((project) => !project.draft)
-    .sort(
-      (a, b) =>
-        Number(b.featured) - Number(a.featured) ||
-        a.title.localeCompare(b.title),
-    );
+    .sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
+export async function getFeaturedProjects(): Promise<Project[]> {
+  return (await getAllProjects()).filter(
+    (project) => project.featuredOrder !== null,
+  );
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {

@@ -6,7 +6,7 @@ Use a current stable Next.js App Router release with TypeScript and React Server
 
 The system has four layers:
 
-1. **Content:** MDX case studies and typed structured records.
+1. **Content:** MDX project documentation and typed structured records.
 2. **Domain:** schemas, normalization, sorting, filtering, search indexing, and metadata derivation.
 3. **Presentation:** reusable server-first page sections and UI primitives.
 4. **Platform:** Next.js routing, Vercel deployment, CI, observability adapters, and security configuration.
@@ -22,7 +22,7 @@ No UI component imports raw files directly. Pages request normalized domain mode
 | Styling         | Tailwind CSS with CSS variables                  | Token-driven styling and low runtime cost                                      |
 | Components      | shadcn/ui source components                      | Accessible primitives remain owned and adaptable                               |
 | Motion          | Motion for React (Framer Motion package lineage) | Limited progressive micro-interactions                                         |
-| Content         | MDX for projects; typed data modules for records | Rich case studies plus maintainable structured data                            |
+| Content         | MDX for projects; typed data modules for records | Rich project documentation plus maintainable structured data                   |
 | Validation      | Zod                                              | Build-time validation and inferred types                                       |
 | Theme           | next-themes                                      | Persistent system/light/dark modes without flash                               |
 | Icons           | Lucide React                                     | Consistent, tree-shakeable icon system                                         |

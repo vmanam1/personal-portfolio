@@ -1,56 +1,99 @@
 ---
 title: Arizona Power Outage Archive
 slug: arizona-power-outage-archive
-summary: A project case study for an Arizona power outage archive. Technical details are being prepared.
-status: Case study in progress
+summary: An automated hourly archive that standardizes public outage data from seven Arizona electric utilities into timestamped JSON snapshots for research and historical analysis.
+status: Active
 publishedAt: 2026-07
 updatedAt: 2026-07
-featured: true
+displayOrder: 3
+featuredOrder: null
 draft: false
 tags:
-  - Data
+  - Data Engineering
+  - Automation
   - Energy
-technologies: []
+technologies:
+  - Python
+  - Requests
+  - Selenium
+  - REST APIs
+  - ArcGIS
+  - GitHub Actions
+  - JSON
 repositoryUrl: https://github.com/vmanam1/az-power-outage-archive
 demoUrl: null
 ---
 
 ## Overview
 
-TODO: Add the approved project overview, archive scope, and intended users.
+Arizona Power Outage Archive is an automated data-collection system that preserves public outage information from seven Arizona electric utilities. It runs hourly through GitHub Actions and writes timestamped JSON snapshots in a common format so changing outage conditions can be studied over time.
+
+The archive covers Arizona Public Service, Salt River Project, Sulphur Springs Valley Electric Cooperative, Trico Electric Cooperative, Electrical District No. 3, Mohave Electric Cooperative, and Navopache Electric Cooperative.
 
 ## Problem
 
-TODO: Describe the specific outage-data access or preservation problem.
+Utility outage information is designed primarily for current operational awareness. Providers expose it through different ArcGIS layers, JSON APIs, XML services, and browser-rendered maps, and historical snapshots are not consistently available after conditions change.
+
+The project needed to collect those heterogeneous public sources reliably, normalize their records without erasing source-specific context, and preserve successful results even when one provider was temporarily unavailable.
 
 ## Solution
 
-TODO: Explain the verified collection, storage, and presentation workflow.
+The system gives each utility an isolated provider adapter. API-based collectors use Requests, while Selenium and Chrome retrieve data from NISC browser-based maps. A shared archival layer normalizes timestamps to Arizona time, validates provider summaries and outage records, and stores each run as a timestamped JSON file.
+
+GitHub Actions executes the pipeline at minute seven of every hour and commits newly generated snapshots back to the repository. Provider failures are isolated, so data from successful collectors is retained instead of discarding the entire run.
 
 ## Architecture
 
-TODO: Add the system components, data flow, persistence, and architecture diagram.
+1. The scheduled GitHub Actions workflow starts a Python 3.11 environment and installs Chrome.
+2. A runner invokes the provider adapters independently.
+3. Adapters collect ArcGIS REST, JSON, XML, or browser-rendered outage data.
+4. Shared validation standardizes metadata, outage totals, coordinates, causes, and time fields.
+5. The archive layer writes provider-specific timestamped JSON snapshots.
+6. The workflow commits new files under `data/` while preventing concurrent archive jobs from racing.
 
 ## Features
 
-TODO: Document the implemented archive and exploration capabilities.
+- Hourly automated collection from seven Arizona utilities
+- Provider adapters for REST APIs, ArcGIS feature layers, XML services, and NISC maps
+- Standardized JSON snapshots with source metadata and summary totals
+- Arizona MST timestamp normalization
+- Three-attempt retry handling with exponential backoff
+- Per-provider fault isolation and validation before persistence
+- Concurrency-controlled GitHub Actions archival workflow
 
 ## Tech Stack
 
-TODO: Confirm and list the technologies used in the repository.
+- **Collection:** Python, Requests, Selenium, Google Chrome
+- **Sources:** REST APIs, ArcGIS feature layers, XML services, NISC outage maps
+- **Storage:** Timestamped JSON files organized by provider
+- **Automation:** GitHub Actions scheduled workflows
 
 ## Implementation
 
-TODO: Describe important implementation decisions and supporting code paths.
+The provider layer separates source-specific extraction from the common archive contract. APS and SSVEC use ArcGIS feature services, SRP exposes public JSON, ED3 provides XML, and Trico, Mohave, and Navopache require Chrome-based collection from NISC maps.
+
+Each snapshot records its provider, collection time, source, scraper version, summary counts, and normalized outage records. The workflow uses a dedicated concurrency group and does not cancel an in-progress run, preventing two scheduled jobs from writing competing snapshots.
 
 ## Challenges
 
-TODO: Document real source, reliability, or data-quality challenges.
+- Public utility schemas and websites are outside the project's control and can change without notice.
+- Browser-rendered sources require a heavier Selenium and Chrome execution path than direct APIs.
+- Utilities may suppress small outages, omit fields, or delay updates for operational and privacy reasons.
+- Partial failures must not erase valid snapshots collected from other providers during the same run.
 
 ## Lessons Learned
 
-TODO: Add lessons supported by the development process.
+- A provider-adapter boundary keeps heterogeneous data sources manageable behind one archive format.
+- Fault isolation matters in scheduled collection systems because one unstable source should not invalidate unrelated results.
+- Validation and source metadata are essential when archived data will be compared long after collection.
+- Repository-native automation can support a transparent small-scale historical archive without separate infrastructure.
 
 ## Future Improvements
 
-TODO: Add planned improvements after the current implementation has been reviewed.
+- Add automated alerts when a provider schema or endpoint changes
+- Publish aggregate trend analysis and visualizations over archived snapshots
+- Add stronger completeness and anomaly checks across consecutive runs
+- Move long-term snapshots to durable object storage as archive volume grows
+- Add observability for provider latency, retries, and collection success rates
+
+This archive is intended for research and historical reference, not emergency notification. Current conditions should always be confirmed with the relevant utility.

@@ -1,0 +1,100 @@
+---
+title: Automatic License Plate Detection
+slug: automatic-license-plate-detection
+summary: A video-processing pipeline that detects and tracks vehicles, associates license plates with each vehicle, reads UK-format plate text, interpolates missed frames, and renders annotated output video.
+status: Complete
+publishedAt: 2023-12
+updatedAt: 2026-07
+displayOrder: 6
+featuredOrder: null
+draft: false
+tags:
+  - Computer Vision
+  - Object Tracking
+  - OCR
+technologies:
+  - Python
+  - YOLOv8
+  - OpenCV
+  - SORT
+  - EasyOCR
+  - NumPy
+  - Pandas
+repositoryUrl: https://github.com/VishalManam/automatic-license-plate-detection
+demoUrl: null
+---
+
+## Overview
+
+Automatic License Plate Detection processes road video to detect vehicles and license plates, maintain vehicle identities across frames, recognize UK-format plate text, and render the results back onto an annotated output video.
+
+The pipeline combines two YOLOv8 detectors with SORT tracking, OpenCV image processing, OCR, CSV-based intermediate results, and interpolation for frames where a detection is temporarily missing.
+
+## Problem
+
+Reading license plates from video is not a single detection task. The system must identify relevant vehicles, track each one over time, locate a smaller plate region, associate that plate with the correct vehicle, recognize noisy text, and maintain visually continuous results when individual frames are missed.
+
+## Solution
+
+A pretrained YOLOv8 model detects cars, motorcycles, buses, and trucks, while a second YOLOv8 model detects license plates. SORT assigns persistent track IDs to vehicles. Each plate is matched to the enclosing tracked-vehicle box, cropped, converted to grayscale, thresholded, and passed to OCR.
+
+Recognized strings are normalized against the seven-character UK plate format, including common letter-digit substitutions. Results are written to CSV, missing bounding boxes are linearly interpolated between known frames, and a visualization stage overlays vehicle boxes, plate crops, and recognized text on the output video.
+
+## Architecture
+
+1. OpenCV reads the source video frame by frame.
+2. YOLOv8 detects supported vehicle classes.
+3. SORT associates detections over time and returns vehicle track IDs.
+4. A custom YOLOv8 model detects license plates.
+5. Spatial containment links each plate to a tracked vehicle.
+6. Grayscale thresholding prepares the crop for EasyOCR.
+7. Format validation normalizes plausible UK registration strings.
+8. CSV output records boxes, confidence scores, track IDs, and recognized text.
+9. SciPy interpolation fills gaps before OpenCV renders the annotated video.
+
+## Features
+
+- Vehicle and license-plate detection with separate YOLOv8 models
+- Multi-object tracking through SORT
+- Plate-to-vehicle association using bounding-box containment
+- OCR preprocessing and confidence capture
+- UK registration-format validation and character correction
+- Linear interpolation for missing frame detections
+- Annotated output video with plate text and bounding boxes
+
+## Tech Stack
+
+- **Detection:** Ultralytics YOLOv8
+- **Tracking:** SORT, FilterPy, LAP
+- **Vision and video:** Python, OpenCV
+- **Recognition:** EasyOCR
+- **Data processing:** NumPy, pandas, SciPy, CSV
+
+## Implementation
+
+`main.py` performs detection, tracking, association, OCR, and result collection. Utility functions write structured CSV output, match plates to enclosing vehicle boxes, validate the expected UK format, and correct visually ambiguous characters such as `O` and `0` based on their position.
+
+`add_missing_data.py` groups results by vehicle ID and linearly interpolates bounding boxes between observed frames. `visualize.py` then combines the interpolated results with the original video and writes the final annotated output.
+
+## Challenges
+
+- License plates occupy a small region and may be blurred, angled, or partially obscured.
+- Vehicle and plate detections must be associated consistently as multiple objects move through a frame.
+- OCR commonly confuses visually similar letters and digits.
+- Temporary missed detections create gaps that would make the rendered output flicker without interpolation.
+
+## Lessons Learned
+
+- A complete video-understanding workflow needs detection, association, tracking, recognition, and post-processing rather than one model alone.
+- Position-aware text rules can correct common OCR ambiguities when the target format is known.
+- Persistent track IDs provide the link between frame-level detections and object-level results.
+- Intermediate structured output makes interpolation and visualization easier to debug independently.
+
+## Future Improvements
+
+- Package model and runtime dependencies in a reproducible environment
+- Add automated tests for plate formatting, association, and interpolation
+- Evaluate precision, recall, OCR accuracy, and tracking quality on a labeled test set
+- Replace bounding-box containment with a scored association strategy for crowded scenes
+- Support additional regional plate formats through configurable validators
+- Add real-time camera input and performance profiling

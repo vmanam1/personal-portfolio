@@ -2,27 +2,58 @@ import { describe, expect, it } from "vitest";
 
 import { getAllEducation } from "@/lib/content/education";
 import { getAllExperiences } from "@/lib/content/experience";
-import { getAllProjects, getProjectBySlug } from "@/lib/content/projects";
+import {
+  getAllProjects,
+  getFeaturedProjects,
+  getProjectBySlug,
+} from "@/lib/content/projects";
 import { getSkillGroups } from "@/lib/content/skills";
 
 describe("portfolio content", () => {
   it("validates and returns experience in reverse chronological order", () => {
     const experience = getAllExperiences();
 
-    expect(experience).toHaveLength(7);
+    expect(experience).toHaveLength(8);
     expect(experience[0]?.id).toBe("asu-leaps-software-engineer");
   });
 
   it("validates education and skills", () => {
-    expect(getAllEducation()).toHaveLength(2);
+    const education = getAllEducation();
+
+    expect(education).toHaveLength(2);
+    expect(
+      education.find((item) => item.id === "iiit-bhubaneswar-btech-it")
+        ?.coursework,
+    ).toHaveLength(60);
     expect(getSkillGroups()).toHaveLength(8);
   });
 
   it("compiles all project MDX and resolves a project by slug", async () => {
     const projects = await getAllProjects();
+    const featuredProjects = await getFeaturedProjects();
     const project = await getProjectBySlug("pdf-rag-pipeline");
 
-    expect(projects).toHaveLength(4);
+    expect(projects.map((item) => item.slug)).toEqual([
+      "pdf-rag-pipeline",
+      "nyc-data-analytics-pipeline",
+      "arizona-power-outage-archive",
+      "django-blog-platform",
+      "customer-churn-prediction",
+      "automatic-license-plate-detection",
+      "authentication-portal",
+    ]);
+    expect(featuredProjects.map((item) => item.slug)).toEqual([
+      "pdf-rag-pipeline",
+      "nyc-data-analytics-pipeline",
+    ]);
+    const skills = new Set(getSkillGroups().flatMap((group) => group.skills));
+    const projectTechnologies = new Set(
+      projects.flatMap((item) => item.technologies),
+    );
+
+    expect(
+      [...projectTechnologies].filter((technology) => !skills.has(technology)),
+    ).toEqual([]);
     expect(project?.title).toBe("PDF RAG Pipeline");
   });
 });

@@ -4,7 +4,7 @@
 
 Build a premium, content-driven engineering portfolio for Vishal Manam. The product should communicate his experience in software engineering, machine learning, computer vision, data systems, cloud platforms, and intelligent energy systems. It must feel dependable and deliberately engineered rather than decorative or trend-driven.
 
-The initial release is a statically generated Next.js application deployed to Vercel. It supports rich project case studies, structured professional history, theme selection, keyboard navigation, search, filtering, resume access, and future publishing without coupling content to presentation.
+The initial release is a statically generated Next.js application deployed to Vercel. It supports rich project documentation, structured professional history, theme selection, keyboard navigation, search, filtering, resume access, and future publishing without coupling content to presentation.
 
 ## 2. Goals
 
@@ -35,7 +35,7 @@ The initial release is a statically generated Next.js application deployed to Ve
 
 ### Engineer or technical interviewer
 
-- Evaluate system thinking through detailed project case studies.
+- Evaluate system thinking through detailed project documentation.
 - Review architecture, technical decisions, constraints, challenges, and source code.
 - Distinguish demonstrated technologies from a generic keyword inventory.
 
@@ -97,14 +97,14 @@ Full descriptions must be transcribed from user-approved sources and reviewed be
 
 ### Initial projects
 
-The product must provide a complete case-study structure for:
+The product must provide a complete project-detail structure for:
 
 1. PDF RAG Pipeline
 2. NYC Data Analytics Pipeline
 3. Django Blog Platform
 4. Arizona Power Outage Archive
 
-Only titles are currently verified. Descriptions, stacks, links, images, and case-study claims remain `TODO` until provided.
+Only titles are currently verified. Descriptions, stacks, links, images, and project claims remain `TODO` until provided.
 
 ## 7. Information architecture
 
@@ -115,7 +115,7 @@ Only titles are currently verified. Descriptions, stacks, links, images, and cas
 | `/`                | Positioning, current focus, selected projects, recent experience, primary calls to action |
 | `/experience`      | Complete professional timeline with expandable details                                    |
 | `/projects`        | Filterable project index                                                                  |
-| `/projects/[slug]` | Individual project case study                                                             |
+| `/projects/[slug]` | Individual project details                                                                |
 | `/skills`          | Categorized skill inventory without ratings                                               |
 | `/education`       | Degrees, coursework, activities, and verified achievements                                |
 | `/resume`          | Embedded preview with download and print actions                                          |
@@ -163,7 +163,7 @@ These are architectural extension points, not initial navigation items.
 - Filters derive from content tags and update a result count.
 - Filtering is keyboard accessible and may be represented in the URL.
 - Project detail pages contain overview, problem, solution, architecture, stack, features, implementation, challenges, lessons, future improvements, media, source, demo, and back navigation.
-- Empty case-study sections render a clearly labeled "Details forthcoming" state or remain excluded according to content metadata.
+- Empty project sections render a clearly labeled "Details forthcoming" state or remain excluded according to content metadata.
 
 ### Skills
 
@@ -206,7 +206,7 @@ These are architectural extension points, not initial navigation items.
 
 ## 9. Content requirements
 
-- Project case studies use MDX with validated frontmatter.
+- Detailed project pages use MDX with validated frontmatter.
 - Experience, education, skills, navigation, and site settings use validated TypeScript/JSON-compatible content modules.
 - Content schemas reject missing required fields, invalid dates, duplicate slugs, unsafe URLs, and unknown enum values during build.
 - Draft content is excluded from production.

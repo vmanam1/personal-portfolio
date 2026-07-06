@@ -20,16 +20,14 @@ export function EducationItem({ education }: { education: Education }) {
         <MapPin className="size-4" aria-hidden /> {education.location}
       </p>
 
-      {education.activities.length > 0 ? (
-        <div className="mt-7 border-t border-border pt-6">
-          <h3 className="text-sm font-semibold">Activities</h3>
-          <ul className="mt-3 grid gap-2 text-sm leading-6 text-muted-foreground">
-            {education.activities.map((activity) => (
-              <li key={activity}>{activity}</li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+      <div className="mt-7 border-t border-border pt-6">
+        <h3 className="text-sm font-semibold">Activities and societies</h3>
+        <ul className="mt-3 grid gap-2 text-sm leading-6 text-muted-foreground">
+          {education.activities.map((activity) => (
+            <li key={activity}>{activity}</li>
+          ))}
+        </ul>
+      </div>
 
       <details className="group mt-7 border-t border-border pt-4">
         <summary className="inline-flex min-h-11 cursor-pointer list-none items-center rounded-sm text-sm font-medium text-accent outline-none focus-visible:ring-2 focus-visible:ring-focus [&::-webkit-details-marker]:hidden">

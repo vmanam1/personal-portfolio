@@ -1,72 +1,59 @@
-import { ArrowUpRight, Code2, UserRound } from "lucide-react";
+import { Mail } from "lucide-react";
 import type { Metadata } from "next";
 
-import { MotionLift } from "@/components/motion/motion-lift";
+import { ContactForm } from "@/components/contact/contact-form";
 import { PageHeader } from "@/components/shared/page-header";
 import { siteConfig } from "@/content/config/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Connect with Vishal Manam through LinkedIn or GitHub.",
+  description: "Get in touch with Vishal Manam via LinkedIn or email.",
 };
-
-const channels = [
-  {
-    label: "LinkedIn",
-    description: "Professional updates and direct messages.",
-    href: siteConfig.social.linkedin,
-    icon: UserRound,
-  },
-  {
-    label: "GitHub",
-    description: "Code, repositories, and ongoing engineering work.",
-    href: siteConfig.social.github,
-    icon: Code2,
-  },
-] as const;
 
 export default function ContactPage() {
   return (
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Let’s talk about useful work."
-        description="For roles, collaborations, or technical conversations, connect through one of the verified channels below."
+        title="Let's talk about useful work."
+        description="For roles, collaborations, or technical conversations — reach out directly."
       />
-      <div className="site-container section-space grid gap-6 md:grid-cols-2">
-        {channels.map(({ label, description, href, icon: Icon }) => (
-          <MotionLift key={href}>
-            <a
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              className="group relative block h-full rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-colors outline-none hover:border-accent/50 focus-visible:ring-2 focus-visible:ring-focus sm:p-8"
-            >
-              <div className="flex items-start justify-between gap-6">
-                <span className="grid size-11 place-items-center rounded-[var(--radius-sm)] border border-border bg-surface-subtle">
-                  <Icon className="size-5 text-accent" aria-hidden />
-                </span>
-                <ArrowUpRight
-                  className="size-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden
-                />
-              </div>
-              <h2 className="mt-10 text-2xl font-semibold">{label}</h2>
-              <p className="mt-2 leading-7 text-muted-foreground">
-                {description}
-              </p>
-              <span className="sr-only">(opens in a new tab)</span>
-            </a>
-          </MotionLift>
-        ))}
-        <section className="border-t border-border pt-8 md:col-span-2">
-          <h2 className="text-lg font-semibold">Email and contact form</h2>
-          <p className="mt-3 max-w-2xl leading-7 text-muted-foreground">
-            TODO: Add the approved public email address. A contact form will
-            only be enabled after its delivery provider, abuse controls, and
-            privacy handling are selected.
-          </p>
-        </section>
+      <div className="site-container section-space max-w-2xl">
+        {/* Primary contact channels */}
+        <p className="leading-7 text-muted-foreground">
+          The best way to reach me is through{" "}
+          <a
+            href={siteConfig.social.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-foreground underline underline-offset-4 hover:text-accent"
+          >
+            LinkedIn
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>{" "}
+          or by emailing me directly at{" "}
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="font-medium text-foreground underline underline-offset-4 hover:text-accent"
+          >
+            {siteConfig.email}
+          </a>
+          . If you&apos;re unable to reach me through either of those, feel free
+          to submit the form below and I&apos;ll get back to you.
+        </p>
+
+        {/* Divider */}
+        <div className="my-10 flex items-center gap-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+            <Mail className="size-3.5" aria-hidden />
+            Contact form
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+
+        {/* Contact form */}
+        <ContactForm />
       </div>
     </>
   );
