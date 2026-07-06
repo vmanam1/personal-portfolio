@@ -10,8 +10,8 @@ export const siteConfig = {
   locale: "en_US",
   email: null,
   resume: {
-    path: null,
-    updatedAt: null,
+    path: "/resume.pdf",
+    updatedAt: "2026-07",
   },
   social: {
     github: "https://github.com/vmanam1",
