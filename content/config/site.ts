@@ -6,7 +6,7 @@ export const siteConfig = {
     "Software and machine learning engineer building dependable systems across intelligent energy, computer vision, and data platforms.",
   footerDescription:
     "Software Engineer building reliable software for intelligent systems, cloud platforms, and real-world applications.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://vishalmanam.dev",
   locale: "en_US",
   email: "vmanam1@asu.edu",
   resume: {
