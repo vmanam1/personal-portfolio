@@ -17,8 +17,8 @@ export default async function ProjectsPage() {
     <>
       <PageHeader
         eyebrow="Projects"
-        title="Systems, pipelines, and products."
-        description="Selected personal and academic engineering projects. Missing details are marked clearly rather than inferred."
+        title="Building software with real-world impact."
+        description="From cloud-native platforms and data pipelines to AI-powered applications and computer vision systems."
       />
       <div className="site-container section-space">
         {projects.map((project, index) => (

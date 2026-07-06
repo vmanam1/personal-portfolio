@@ -17,8 +17,8 @@ export default function EducationPage() {
     <>
       <PageHeader
         eyebrow="Education"
-        title="Computer science, from foundations to advanced systems."
-        description="Graduate study at Arizona State University, supported by an undergraduate foundation in information technology."
+        title="Master's in Computer Science from Arizona State University, built upon a Bachelor's in Information Technology."
+        description=""
       />
       <div className="site-container section-space grid gap-6">
         {education.map((item) => (

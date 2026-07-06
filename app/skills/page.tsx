@@ -18,7 +18,7 @@ export default function SkillsPage() {
       <PageHeader
         eyebrow="Skills"
         title="A practical engineering toolkit."
-        description="Technologies I’ve worked with across software, machine learning, cloud infrastructure, data systems, and developer tooling. No ratings—just the tools themselves."
+        description="Technologies I’ve worked with across software, machine learning, cloud infrastructure, data systems, and developer tooling."
       />
       <div className="site-container section-space">
         {groups.map((group) => (
