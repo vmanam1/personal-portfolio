@@ -2,7 +2,7 @@
 
 A production-ready personal portfolio built with Next.js 15, TypeScript, Tailwind CSS v4, and MDX. Designed to be fast, accessible, and easy to maintain — content lives in flat files and config, so updates require no component changes.
 
-**Live site:** _Deployment pending_ — `main` is ready.
+**Live site:** [vishalmanam.dev](https://vishalmanam.dev)
 
 ---
 
@@ -262,14 +262,15 @@ Three modes are available: **Dark** (default), **Light**, and **System** (follow
 
 ## Deployment
 
-The `main` branch is deployment-ready. Recommended platform: **Vercel** (zero-config for Next.js).
+The `main` branch is live at **[vishalmanam.dev](https://vishalmanam.dev)**, deployed on Vercel.
 
-Before deploying:
+Every push to `main` triggers an automatic redeploy — no manual steps needed.
 
-1. Set the `NEXT_PUBLIC_SITE_URL` environment variable to the production HTTPS origin (e.g. `https://vishalmanam.com`)
-2. Verify metadata, canonical URLs, and sitemap output reflect the production domain
-3. Confirm `public/resume.pdf` is the approved version
-4. Review security headers in `next.config.ts`
+Before pushing significant changes:
+
+1. Run `npm run check` locally to catch any issues before they hit production
+2. Verify `public/resume.pdf` is the approved version when updating the resume
+3. The `NEXT_PUBLIC_SITE_URL` environment variable is set to `https://vishalmanam.dev` in the Vercel dashboard
 
 ---
 
