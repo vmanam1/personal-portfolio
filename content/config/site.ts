@@ -8,7 +8,7 @@ export const siteConfig = {
     "Software Engineer building reliable software for intelligent systems, cloud platforms, and real-world applications.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en_US",
-  email: null,
+  email: "vmanam1@asu.edu",
   resume: {
     path: "/resume.pdf",
     updatedAt: "2026-07",
