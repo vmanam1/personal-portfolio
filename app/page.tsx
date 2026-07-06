@@ -1,7 +1,7 @@
 import { ArrowRight, FileText, MapPin } from "lucide-react";
 import Link from "next/link";
 import { FaGithub, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { SiLetterboxd } from "react-icons/si";
+import { SiLetterboxd, SiLeetcode } from "react-icons/si";
 
 import { ExperienceItem } from "@/components/experience/experience-item";
 import { FeaturedProjectItem } from "@/components/projects/featured-project-item";
@@ -14,6 +14,7 @@ import { getFeaturedProjects } from "@/lib/content/projects";
 const homeSocialLinks = [
   { label: "GitHub", href: siteConfig.social.github, icon: FaGithub },
   { label: "LinkedIn", href: siteConfig.social.linkedin, icon: FaLinkedin },
+  { label: "LeetCode", href: siteConfig.social.leetcode, icon: SiLeetcode },
   { label: "Instagram", href: siteConfig.social.instagram, icon: FaInstagram },
   { label: "Twitter", href: siteConfig.social.twitter, icon: FaXTwitter },
   {

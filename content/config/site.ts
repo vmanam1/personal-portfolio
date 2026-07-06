@@ -16,6 +16,7 @@ export const siteConfig = {
   social: {
     github: "https://github.com/vmanam1",
     linkedin: "https://www.linkedin.com/in/vishal-manam/",
+    leetcode: "https://leetcode.com/u/vmanam1/",
     instagram: "https://www.instagram.com/vmanam1",
     twitter: "https://x.com/VishalManam",
     letterboxd: "https://letterboxd.com/vmanam1/",
