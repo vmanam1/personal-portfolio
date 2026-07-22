@@ -31,7 +31,6 @@ for (const asset of [
   "/opengraph-image",
   "/manifest.webmanifest",
   "/robots.txt",
-  "/sitemap.xml",
 ]) {
   test(`${asset} is available`, async ({ request }) => {
     const response = await request.get(asset);
@@ -39,3 +38,14 @@ for (const asset of [
     expect((await response.body()).byteLength).toBeGreaterThan(0);
   });
 }
+
+test("responses are marked noindex for search engines", async ({ request }) => {
+  const response = await request.get("/");
+  expect(response.headers()["x-robots-tag"]).toContain("noindex");
+});
+
+test("robots.txt does not advertise a sitemap", async ({ request }) => {
+  const response = await request.get("/robots.txt");
+  const body = await response.text();
+  expect(body.toLowerCase()).not.toContain("sitemap");
+});

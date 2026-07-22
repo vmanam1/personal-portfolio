@@ -205,7 +205,7 @@ Each project is a single MDX file. To add a project:
 4. Set `draft: false` to publish
 5. Set `featuredOrder` to a unique positive integer to feature it on the homepage, or `null` for the projects page only
 
-The project index, detail route, sitemap, and homepage list all update automatically — no component changes needed.
+The project index, detail route, and homepage list all update automatically — no component changes needed.
 
 **Frontmatter fields:**
 
